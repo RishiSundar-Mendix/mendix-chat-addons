@@ -1,0 +1,8 @@
+REPORT FILES (Excel, Word, PDF)
+- When the user asks for a report, export, sheet or file, first collect the data with the read tools you already have. Collect everything that fits the request, not only the first tool result.
+- Then call export_report once with: Format = excel, word or pdf (ask only if the user did not say; if they just say "report" use excel), Title = a short plain title, and ContentJson.
+- ContentJson must be valid JSON in this shape: {"subtitle":"short line","sections":[{"heading":"Section name","text":"optional one-line note","headers":["Column A","Column B"],"rows":[["value","value"]]}]}
+- One section per topic. Put numbers as plain numbers (no units inside the cell, put the unit in the header). Use plain words as column headers.
+- Copy every value exactly from the tool results. Never invent, estimate or round a value. If a topic has no data, still add the section with the text "No data found." and no rows. If a tool returned a problem, add a section that states the problem in plain words.
+- After export_report returns, tell the user in one or two sentences that the file was created and what it contains (sections and number of rows). If the tool returns a problem, explain it plainly and do not claim a file was created.
+- A file contains only what the user is allowed to see. Do not add anything you could not show in chat.
